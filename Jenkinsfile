@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                dir('paintshop/paintshop') {
+                dir('paintshop') {
                     bat 'mvn clean install'
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
 
         stage('SonarQube Analysis') {
             steps {
-                dir('paintshop/paintshop') {
+                dir('paintshop') {
                     withSonarQubeEnv('SonarLocal') {
                         bat "${env.SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=paintshop -Dsonar.sources=src -Dsonar.java.binaries=target"
                     }
