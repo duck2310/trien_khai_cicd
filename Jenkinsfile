@@ -21,7 +21,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 dir('paintshop') {
-                    withSonarQubeEnv('SonarLocal') {
+                    withSonarQubeEnv('mysonar') {
                         bat "${env.SONARQUBE_SCANNER_HOME}/bin/sonar-scanner -Dsonar.projectKey=paintshop -Dsonar.sources=src -Dsonar.java.binaries=target"
                     }
                 }
@@ -30,7 +30,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                dir('paintshop/paintshop') {
+                dir('paintshop') {
                     bat 'mvn test'
                 }
             }
